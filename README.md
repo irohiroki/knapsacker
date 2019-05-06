@@ -1,8 +1,8 @@
 # Knapsacker
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/knapsacker`. To experiment with that code, run `bin/console` for an interactive prompt.
+Knapsacker is a [Knapsack problem](https://en.wikipedia.org/wiki/Knapsack_problem) solver in Ruby, using branch and bound algorithm.
 
-TODO: Delete this and the text above, and describe your gem
+It has a simple API and may solve problems in your holiday programming. (That is, it's not optimized. Yet.)
 
 ## Installation
 
@@ -22,13 +22,51 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+First, instanciate Knapsacker with an array of your items. The items must respond to `value` and `cost`. And a keyword argument `capacity` is mandatory. e.g.:
+
+```ruby
+Item = Struct.new(:value, :cost)
+knapsacker = Knapsacker.new([Item.new(3, 4), Item.new(4, 5)], capacity: 5)
+```
+
+Then call `pack`:
+
+```ruby
+items_to_take = knapsacker.pack
+```
+
+It will return items you should take.
+
+### Similar projects
+
+There are some knapsack problem solver in Ruby but none has API. (Some of them accepts items as command line arguments or data in file.)
+
+* [danielsellergren/ruby-knapsack](https://github.com/danielsellergren/ruby-knapsack) ... Accepts command line arguments
+* [sucanjan/knapsack-solver](https://github.com/sucanjan/knapsack-solver) ... Accepts data files, Gnuplot-able
+* [soulcutter/no_change_please](https://github.com/soulcutter/no_change_please) ... Accepts a data file
+* [mertbulan/knapsack-problem](https://github.com/mertbulan/knapsack-problem) ... No API
+* [pedroperrone/knapsack-problem](https://github.com/pedroperrone/knapsack-problem) ... No API
+* [shouheiyamauchi/KnapsackProblemSolver](https://github.com/shouheiyamauchi/KnapsackProblemSolver) ... No API
+* [Adacchi3/KnapsackProblem](https://github.com/Adacchi3/KnapsackProblem) ... No API
+* [sas145alex/knapsack_greedy](https://github.com/sas145alex/knapsack_greedy) ... No API
+* [bsmlima/connected-knapsack](https://github.com/bsmlima/connected-knapsack) ... No README
+* [mhartman4/fanduel-scrape](https://github.com/mhartman4/fanduel-scrape) ... No README
+
+### Roadmap
+
+* 1.0
+  * Interface to support the general form of Knapsack problem, including:
+    * Multiple inequality constraints
+    * Multiple equality constraints
+  * Spport for items that have interface other than `value` and `cost`
+* 1.1
+  * Some optimization, maybe. Either in C, either with some smarter algorithm.
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
